@@ -1,0 +1,65 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node modules
+node_modules
+
+# OS generated files
+.DS_Store
+
+# Build output
+dist
+dist-ssr
+coverage
+
+# Local environment files
+*.local
+
+# Cypress
+/cypress/videos/
+/cypress/screenshots/
+
+# Editor directories and files
+frontend/.vscode/extensions.json
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Maven specific
+target
+
+# Ignoring frontend build output in root
+/frontend/dist
+/frontend/.vscode
+/frontend/node
+
+# Ignoring frontend node_modules in root
+/frontend/node_modules
+
+# Ignoring IntelliJ IDEA specific files in root
+/.idea
+
+# Ignoring Eclipse specific files in root
+/.settings/
+/*.project
+/*.classpath
+
+# Ignoring backend target directory
+/backend/target
+/backend/src/main/resources/static
+
+# Ignoring temporary files in the root
+/tmp/
