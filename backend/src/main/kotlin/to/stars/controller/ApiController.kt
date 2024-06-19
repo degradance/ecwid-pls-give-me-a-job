@@ -20,6 +20,11 @@ class ApiController @Autowired constructor(
         return oAuthService.get("categories", emptyMap())
     }
 
+    @GetMapping("/category")
+    fun getCategory(@RequestParam categoryId: Long): String? {
+        return oAuthService.get("categories/$categoryId", emptyMap())
+    }
+
     @ExceptionHandler(Exception::class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     fun handleException(
