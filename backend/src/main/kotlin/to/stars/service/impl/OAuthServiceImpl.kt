@@ -60,5 +60,5 @@ open class OAuthServiceImpl: OAuthService {
 
 private fun Map<String, String>.toUrl(): String {
     this.ifEmpty { return "" }
-    return "/?" + this.entries.joinToString("&") { (k, v) -> "$k=$v" }
+    return "?" + this.entries.joinToString("&") { (k, v) -> "$k=$v" }
 }
