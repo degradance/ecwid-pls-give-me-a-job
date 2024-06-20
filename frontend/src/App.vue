@@ -1,10 +1,15 @@
 <script setup>
+import {useRouter} from "vue-router";
 
+const router = useRouter();
+const goToHome = () => {
+  router.push("/");
+}
 </script>
 
 <template>
   <header class="bg-black text-amber-200 flex items-center justify-between p-4">
-    <h1 class="text-3xl font-sans">Магазинус</h1>
+    <h1 @click="goToHome" class="text-3xl font-sans cursor-pointer">Магазинус</h1>
     <button
         @click="goToCart"
         class="flex items-center bg-amber-200 text-black px-4 py-2 rounded-md"
