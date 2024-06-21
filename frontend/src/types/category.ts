@@ -3,5 +3,6 @@ export type Category = {
     parentId: number,
     imageUrl: string,
     name: string,
-    productIds: number[]
+    productIds: number[],
+    productCount: number,
 }

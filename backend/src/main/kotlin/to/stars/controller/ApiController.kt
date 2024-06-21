@@ -23,16 +23,28 @@ class ApiController @Autowired constructor(
         val response = oAuthService.get("categories", mapOf(
             "parent" to parentId.toString(),
         ))
-        return response?.let {
-            val jsonNode = objectMapper.readTree(it)
-            val itemsNode = jsonNode.get("items")
-            objectMapper.convertValue(itemsNode, object : TypeReference<List<Any>>() {})
-        }
+        return extractItems(response)
     }
 
     @GetMapping("/category")
     fun getCategory(@RequestParam categoryId: Long): String? {
         return oAuthService.get("categories/$categoryId", emptyMap())
+    }
+
+    @GetMapping("/products")
+    fun searchProductsById(@RequestParam productIds: String): List<Any>? {
+        val response = oAuthService.get("products", mapOf(
+            "productId" to productIds,
+        ))
+        return extractItems(response)
+    }
+
+    private fun extractItems(response: String?): List<Any>? {
+        return response?.let {
+            val jsonNode = objectMapper.readTree(it)
+            val itemsNode = jsonNode.get("items")
+            objectMapper.convertValue(itemsNode, object : TypeReference<List<Any>>() {})
+        }
     }
 
     @ExceptionHandler(Exception::class)
