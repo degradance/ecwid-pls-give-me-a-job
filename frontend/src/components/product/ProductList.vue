@@ -12,7 +12,8 @@ export default defineComponent({
   components: {BaseCarousel, IconRightArrow, IconLeftArrow, ProductCard },
   props: {
     productIds: { type: Array<number>, default: [] },
-    parentCategoryId: { type: Number, required: true },
+    parentCategoryId: { type: Number, required: false, default: 0 },
+    showAsList: { type: Boolean, required: false, default: false },
   },
   data() {
     return {
@@ -22,12 +23,13 @@ export default defineComponent({
   mounted() {
     this.fetchData();
   },
+  updated() {
+    this.fetchData();
+  },
   methods: {
     async fetchData() {
       if (this.productIds && this.productIds.length > 0) {
-        console.log(this.productIds)
         this.products = await fetchProducts(this.productIds);
-        console.log(this.products)
       }
     },
   }
@@ -37,14 +39,25 @@ export default defineComponent({
 <template>
   <div v-if="products && products.length > 0" class="flex flex-col">
     <h2 class="text-2xl font-semibold mb-[24px]">Items</h2>
-    <BaseCarousel :show-buttons="products.length > 2">
+    <div v-if="!showAsList">
+      <BaseCarousel :show-buttons="products.length > 2">
+        <ProductCard
+            v-for="product in products"
+            :key="product.id"
+            :product="product"
+            :parent-category-id="parentCategoryId"
+        />
+      </BaseCarousel>
+    </div>
+    <div v-else>
       <ProductCard
           v-for="product in products"
           :key="product.id"
           :product="product"
           :parent-category-id="parentCategoryId"
+          show-as-row
       />
-    </BaseCarousel>
+    </div>
   </div>
 </template>
 
