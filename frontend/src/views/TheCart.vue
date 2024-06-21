@@ -4,8 +4,9 @@ import IconBackArrow from "@/components/icons/IconBackArrow.vue";
 import ProductList from "@/components/product/ProductList.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import {useRouter} from "vue-router";
-import {getSavedItems} from "@/actions/localStorageActions";
+import {clearItems, getSavedItems} from "@/actions/localStorageActions";
 import {computed, onMounted, onUnmounted, ref} from "vue";
+import Popup from "@/views/Popup.vue";
 
 const router = useRouter();
 const back = () => {
@@ -13,11 +14,13 @@ const back = () => {
 }
 const savedItems = ref(getSavedItems());
 const items = computed(() => savedItems.value);
+const showPopup = ref(false);
 const updateSavedItems = () => {
   savedItems.value = getSavedItems();
 };
 const makePurchase = () => {
-  // todo
+  showPopup.value = true;
+  clearItems();
 };
 onMounted(() => {
   window.addEventListener('storage', updateSavedItems);
@@ -29,6 +32,10 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <Popup v-if="showPopup" @close="showPopup = false">
+    <h2 class="text-4xl font-bold text-black">Congratulations!</h2>
+    <div>Order successfully placed.</div>
+  </Popup>
   <div class="m-[64px] w-full flex flex-col gap-[32px]">
     <BaseButton :on-click="back" text="Continue shopping" dark>
       <IconBackArrow />
@@ -39,11 +46,11 @@ onUnmounted(() => {
       <p>
         Total Items: {{ items.length }}
       </p>
+      <BaseButton :on-click="makePurchase" text="Place order" dark special/>
     </div>
     <div v-else>
-      Empty
+      No items added.
     </div>
-    <BaseButton :on-click="makePurchase" text="Make purchase" dark special/>
   </div>
 </template>
 

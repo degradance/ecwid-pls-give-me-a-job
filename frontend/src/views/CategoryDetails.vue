@@ -22,7 +22,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-if="category" class="m-[64px] w-full flex flex-col gap-[32px]">
+  <div v-if="category" class="m-[64px] flex flex-col gap-[32px] overflow-x-hidden">
     <BaseButton :on-click="back" text="Back" dark>
       <IconBackArrow />
     </BaseButton>

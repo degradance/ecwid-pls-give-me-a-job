@@ -31,9 +31,9 @@
 </script>
 
 <template>
-  <div v-if="categories && categories.length > 0" class="flex flex-col">
+  <div v-if="categories && categories.length > 0" class="flex flex-col w-full">
     <h2 v-if="subcategory" class="text-2xl font-semibold mb-[24px]">Subcategory</h2>
-    <BaseCarousel :show-buttons="categories.length > 2">
+    <BaseCarousel :show-buttons="categories.length > 1">
       <CategoryCard
           v-for="category in categories"
           :key="category.id"

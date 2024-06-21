@@ -18,7 +18,7 @@ const navigateToCategoryDetails = () => {
 
 <template>
   <div @click="navigateToCategoryDetails" class="w-[228px] h-full flex flex-col items-center mb-2 shadow-md bg-black text-amber-200 cursor-pointer relative">
-    <div class="relative w-full h-[228px]">
+    <div class="relative w-[228px] h-[228px]">
       <img
           :src="category.imageUrl"
           :alt="category.name"

@@ -40,7 +40,7 @@ export default defineComponent({
   <div v-if="products && products.length > 0" class="flex flex-col">
     <h2 class="text-2xl font-semibold mb-[24px]">Items</h2>
     <div v-if="!showAsList">
-      <BaseCarousel :show-buttons="products.length > 2">
+      <BaseCarousel :show-buttons="products.length > 1">
         <ProductCard
             v-for="product in products"
             :key="product.id"

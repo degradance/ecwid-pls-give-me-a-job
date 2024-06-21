@@ -8,6 +8,11 @@ export const saveItems = (items: number[]) => {
     window.dispatchEvent(new Event('storage'));
 }
 
+export const clearItems = () => {
+    localStorage.removeItem('savedItems');
+    window.dispatchEvent(new Event('storage'));
+}
+
 export const deleteItem = (id: number) => {
     let items = getSavedItems();
     items = items.filter((itemId: number) => itemId !== id);

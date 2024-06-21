@@ -4,7 +4,7 @@ import ImageWrapper from "@/components/ImageWrapper.vue";
 </script>
 
 <template>
-  <div class="bg-white flex flex-col gap-[32px] items-center">
+  <div class="bg-white flex flex-col gap-[32px] items-center overflow-x-hidden">
     <ImageWrapper label="Category" :img-height=200>
       <img src="/wear1.jpg" alt="wear1"/>
     </ImageWrapper>
