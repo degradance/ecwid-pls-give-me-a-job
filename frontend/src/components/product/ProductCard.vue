@@ -29,22 +29,22 @@ const deleteFromCart = () => {
       class="card-container shadow-md"
       @click="navigateToProductDetails"
     >
-      <div class="relative w-full h-[160px]">
+      <div class="card-wrapper">
         <img
           class="w-full h-full object-cover object-center"
           :src="product.thumbnailUrl"
           :alt="product.name"
         />
       </div>
-      <div class="p-2 text-center text-white bg-black text-2xl">
+      <div class="text-center text-white bg-transparent product-name">
         {{ product.name }}
       </div>
     </div>
   </div>
   <div v-else>
-    <div class="w-[600px] flex flex-row items-center mb-2 border-b border-t justify-between">
+    <div class="row-container flex flex-row items-center mb-2 border-b border-t justify-between">
       <div
-        class="flex flex-row gap-[24px] items-center"
+        class="flex flex-row gap-[12px] justify-between items-center"
         @click="navigateToProductDetails"
       >
         <div class="relative h-[100px] cursor-pointer">
@@ -54,7 +54,7 @@ const deleteFromCart = () => {
             :alt="product.name"
           />
         </div>
-        <div class="p-2 text-center text-black bg-transparent text-xl">
+        <div class="text-center text-black bg-transparent product-name">
           {{ product.name }}
         </div>
       </div>
@@ -82,5 +82,33 @@ const deleteFromCart = () => {
 }
 .card-container:hover {
   background-color: var(--magenta);
+}
+.row-container {
+  max-width: 600px;
+  width: 100%;
+}
+.card-wrapper {
+  position: relative;
+  width: 100%;
+  height: 160px;
+}
+.product-name {
+  font-size: 20px;
+  line-height: 28px;
+  padding: 8px;
+}
+@media (max-width: 600px) {
+  .card-container {
+    width: 160px;
+  }
+  .card-wrapper {
+    height: 120px;
+  }
+  .product-name {
+    font-size: 16px;
+    line-height: 20px;
+    padding: 4px;
+    height: 46px;
+  }
 }
 </style>

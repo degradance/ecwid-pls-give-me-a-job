@@ -21,10 +21,10 @@ const scrollRight = () => {
 </script>
 
 <template>
-  <div class="flex items-center w-full justify-center">
+  <div class="flex items-center w-full justify-center relative">
     <div
       v-if="showButtons"
-      class="button-wrapper"
+      class="button-wrapper left-btn"
     >
       <button
         class="carousel-btn m-[12px]"
@@ -35,13 +35,15 @@ const scrollRight = () => {
     </div>
     <div
       ref="carouselContainer"
-      class="w-fit overflow-x-scroll flex flex-row gap-8"
+      class="carousel-wrapper"
     >
+      <div class="spacer" />
       <slot />
+      <div class="spacer" />
     </div>
     <div
       v-if="showButtons"
-      class="button-wrapper"
+      class="button-wrapper right-btn"
     >
       <button
         class="carousel-btn m-[12px]"
@@ -55,14 +57,40 @@ const scrollRight = () => {
 
 <style scoped>
 .button-wrapper {
+  position: absolute;
   width: fit-content;
-  background: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
   height: 280px;
+  z-index: 10;
+}
+.left-btn {
+  left: -5px;
+  background: linear-gradient(to right, var(--white), var(--white), transparent);
+}
+.right-btn {
+  right: -5px;
+  background: linear-gradient(to left, var(--white), var(--white), transparent);
 }
 .carousel-btn:hover {
   fill: var(--magenta);
+}
+.carousel-wrapper {
+  width: fit-content;
+  overflow-x: scroll;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+.spacer:after {
+  content: "";
+  display: block;
+  width: 40px;
+}
+@media (max-width: 600px) {
+  .button-wrapper {
+    height: 200px;
+  }
 }
 </style>

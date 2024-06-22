@@ -10,6 +10,7 @@ import ImageWrapper from "@/components/ImageWrapper.vue";
       :img-height="200"
     >
       <img
+        class="object-cover w-full"
         src="/wear1.jpg"
         alt="wear1"
       >
@@ -20,6 +21,7 @@ import ImageWrapper from "@/components/ImageWrapper.vue";
       :img-height="300"
     >
       <img
+        class="object-cover w-full"
         src="/wear2.jpg"
         alt="wear2"
       >

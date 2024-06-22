@@ -17,14 +17,18 @@ const back = () => {
 }
 
 onMounted(async () => {
-  category.value = await fetchCategory(Number(route.params.id));
+  try {
+    category.value = await fetchCategory(Number(route.params.id));
+  } catch (error) {
+    console.error(error);
+  }
 });
 </script>
 
 <template>
   <div
     v-if="category"
-    class="m-[64px] flex flex-col gap-[32px] overflow-x-hidden"
+    class="category-details-container"
   >
     <BaseButton
       :on-click="back"
@@ -56,5 +60,12 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.category-details-container {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-x: hidden;
+}
 </style>
 

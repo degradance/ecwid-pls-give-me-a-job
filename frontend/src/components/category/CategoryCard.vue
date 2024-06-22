@@ -21,7 +21,7 @@ const navigateToCategoryDetails = () => {
     class="category-card-container shadow-md"
     @click="navigateToCategoryDetails"
   >
-    <div class="relative w-[228px] h-[228px]">
+    <div class="category-card-wrapper">
       <img
         class="w-full h-full object-cover object-center"
         :src="category.imageUrl"
@@ -50,6 +50,18 @@ const navigateToCategoryDetails = () => {
   cursor: pointer;
   background-color: var(--black);
   position: relative;
+}
+.category-card-wrapper {
+  position: relative;
+  width: 228px;
+  height: 228px;
+}
+@media (max-width: 600px) {
+  .category-card-wrapper {
+    position: relative;
+    width: 148px;
+    height: 148px;
+  }
 }
 </style>
 

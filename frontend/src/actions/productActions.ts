@@ -1,10 +1,17 @@
-import axios from "axios";
+import {fetchWithRetry} from '@/utils/fetchWithRetry';
+import {ProductType} from '@/types/product';
 
-export const fetchProducts = async (productIds: Array<number>) => {
+export const fetchProducts = async (productIds: number[]): Promise<ProductType[]> => {
     try {
-        const response = await axios.get(`/api/products?productIds=${ productIds.join(',') }`);
-        return response.data;
+        const response = await fetchWithRetry(`/api/products?productIds=${productIds.join(',')}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        return await response.json();
     } catch (error) {
-        console.error('Error fetching categories:', error);
+        console.error('Error fetching products:', error);
+        throw error;
     }
 };

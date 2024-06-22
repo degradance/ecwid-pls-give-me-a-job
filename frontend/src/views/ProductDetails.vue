@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import {ref, onMounted, computed} from 'vue';
-import {useRoute, useRouter} from 'vue-router';
+import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import IconBackArrow from "@/components/icons/IconBackArrow.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
-import {fetchProducts} from "@/actions/productActions";
+import { fetchProducts } from "@/actions/productActions";
 import {ProductType} from "@/types/product";
 import Gallery from "@/components/product/ImageGallery.vue";
-import {addItem, deleteItem, isAdded} from "@/actions/localStorageActions";
+import { addItem, deleteItem, isAdded } from "@/actions/localStorageActions";
 
 const route = useRoute();
 const router = useRouter();
@@ -33,10 +33,14 @@ const deleteFromCart = () => {
 }
 
 onMounted(async () => {
-  const result = await fetchProducts([Number(route.params.productId)]);
-  product.value = result[0];
-  if (product.value) {
-    checkInCart.value = isAdded(product.value.id);
+  try {
+    const result = await fetchProducts([Number(route.params.productId)]);
+    product.value = result[0];
+    if (product.value) {
+      checkInCart.value = isAdded(product.value.id);
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 </script>
@@ -48,14 +52,14 @@ onMounted(async () => {
   >
     <BaseButton
       :on-click="back"
-      text="Назад"
+      text="Back"
       dark
     >
       <IconBackArrow />
     </BaseButton>
     <div class="product-details-container gap-[24px]">
       <Gallery :gallery-images="product.galleryImages" />
-      <div class="w-[400px] flex flex-col gap-[24px] items-center">
+      <div class="w-[380px] flex flex-col gap-[24px] items-center">
         <h1 class="text-2xl font-bold text-black">
           {{ product.name }}
         </h1>
@@ -68,7 +72,7 @@ onMounted(async () => {
             v-html="product.description"
           />
         </div>
-        <div class="flex flex-row gap-[24px] items-center justify-between w-[400px]">
+        <div class="flex flex-row gap-[24px] items-center justify-between w-[380px]">
           <p class="text-3xl font-bold text-black">
             &#8381;{{ product.price }}
           </p>
@@ -105,7 +109,7 @@ onMounted(async () => {
   width: 100%;
 }
 .product-details-page {
-  padding: 64px;
+  padding: 32px;
   width: 100%;
 }
 @media (max-width: 1200px) {

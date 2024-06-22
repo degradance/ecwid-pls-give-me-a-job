@@ -16,15 +16,15 @@ const products = ref([] as ProductType[]);
 
 const fetchData = async() => {
   if (productIds && productIds.length > 0) {
-    products.value = await fetchProducts(productIds);
+    try {
+      products.value = await fetchProducts(productIds);
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
 
 onMounted(() => {
-  fetchData();
-});
-
-onUpdated(() => {
   fetchData();
 });
 

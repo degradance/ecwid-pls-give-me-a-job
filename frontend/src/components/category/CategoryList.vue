@@ -12,7 +12,11 @@ import { onMounted, ref } from 'vue';
   const categories = ref([] as Category[]);
 
   const fetchData = async() => {
-    categories.value = await fetchChildrenCategories(parentId);
+    try {
+      categories.value = await fetchChildrenCategories(parentId);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   onMounted(() => {
