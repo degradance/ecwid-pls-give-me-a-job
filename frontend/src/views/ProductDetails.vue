@@ -44,7 +44,7 @@ onMounted(async () => {
 <template>
   <div
     v-if="product"
-    class="m-[64px] w-full flex flex-col gap-[32px]"
+    class="product-details-page flex flex-col gap-[32px]"
   >
     <BaseButton
       :on-click="back"
@@ -53,7 +53,7 @@ onMounted(async () => {
     >
       <IconBackArrow />
     </BaseButton>
-    <div class="flex flex-row gap-[24px] items-top">
+    <div class="product-details-container gap-[24px]">
       <Gallery :gallery-images="product.galleryImages" />
       <div class="w-[400px] flex flex-col gap-[24px] items-center">
         <h1 class="text-4xl font-bold text-black">
@@ -68,7 +68,7 @@ onMounted(async () => {
             v-html="product.description"
           />
         </div>
-        <div class="flex flex-row gap-[24px] items-center justify-between w-full">
+        <div class="flex flex-row gap-[24px] items-center justify-between w-[400px]">
           <p class="text-3xl font-bold text-black">
             &#8381;{{ product.price }}
           </p>
@@ -96,6 +96,23 @@ onMounted(async () => {
 <style scoped>
 .description > p {
   margin-bottom: 12px;
+}
+.product-details-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+.product-details-page {
+  padding: 64px;
+  width: 100%;
+}
+@media (max-width: 1200px) {
+  .product-details-container {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>
 

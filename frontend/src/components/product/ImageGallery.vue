@@ -92,6 +92,15 @@ onMounted(() => {
   display: flex;
   justify-content: center;
 }
+@media (max-width: 800px) {
+  .main-image-container {
+    width: 400px;
+  }
+  .main-image {
+    width: 350px;
+    height: 350px;
+  }
+}
 .main-image {
   width: 500px;
   height: 500px;
