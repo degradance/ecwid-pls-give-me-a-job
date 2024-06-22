@@ -39,7 +39,7 @@ onMounted(async () => {
           :src="category.imageUrl"
           :alt="category.name"
         />
-        <h1 class="text-4xl font-bold text-black">
+        <h1 class="text-2xl font-bold text-black">
           {{ category.name }}
         </h1>
       </div>
