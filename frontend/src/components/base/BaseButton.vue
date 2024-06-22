@@ -1,57 +1,55 @@
+<script setup lang="ts">
+import { BaseButtonType } from "@/types/base";
+
+const props = withDefaults(defineProps<BaseButtonType>(), {
+  dark: true,
+});
+
+const { onClick } = props;
+
+const handleClick = (e: MouseEvent) => {
+  onClick(e);
+};
+</script>
+
 <template>
   <button
-      @click="handleClick"
-      type="button"
-      :class="buttonClass"
-      class="px-4 py-2 flex items-center h-[42px] w-fit"
+    class="base-btn"
+    type="button"
+    :class="{ dark, special }"
+    @click="handleClick"
   >
-    <slot/>
-    <span :class="textClass" class="pl-[4px] text-lg">{{ text }}</span>
+    <slot />
+    <span class="pl-[4px] text-lg">
+      {{ text }}
+    </span>
   </button>
 </template>
 
-<script lang="ts">
-import {defineComponent} from "vue";
-
-export default defineComponent({
-  name: 'BaseButton',
-  props: {
-    text: {
-      type: String,
-      required: true,
-    },
-    onClick: {
-      type: Function,
-      required: true,
-    },
-    dark: {
-      type: Boolean,
-      default: true,
-    },
-    special: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  computed: {
-    buttonClass() {
-      const bg = this.dark ? 'bg-black' : 'bg-amber-200';
-      const txt = this.dark ? (this.special ? 'text-amber-200' : 'text-white') : 'text-black';
-      return bg + ' ' + txt;
-    },
-    textClass() {
-      return this.dark ? (this.special ? 'text-amber-200' : 'text-white') : 'text-black';
-    },
-  },
-  methods: {
-    handleClick(event: MouseEvent) {
-      if (this.onClick) {
-        this.onClick(event);
-      }
-    },
-  },
-});
-</script>
-
 <style scoped>
+.base-btn {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  width: fit-content;
+  padding: 8px 16px;
+  background-color: var(--amber-200);
+  color: var(--black);
+}
+.base-btn.dark {
+  background-color: var(--black);
+  color: var(--white);
+}
+.base-btn.special {
+  background-color: var(--black);
+  color: var(--amber-200);
+}
+.base-btn:focus,
+.base-btn:hover {
+  background-color: var(--orange);
+}
+.base-btn.dark:focus,
+.base-btn.dark:hover {
+  background-color: var(--magenta);
+}
 </style>

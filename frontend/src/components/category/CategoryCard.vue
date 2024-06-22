@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Category } from "@/types/category";
-import {useRouter} from "vue-router";
+import { CategoryCardType } from "@/types/category";
+import { useRouter } from "vue-router";
 
-const props = defineProps<{ category: Category }>();
+const props = defineProps<CategoryCardType>();
 const { category } = props;
 
 const router = useRouter();
@@ -17,15 +17,18 @@ const navigateToCategoryDetails = () => {
 </script>
 
 <template>
-  <div @click="navigateToCategoryDetails" class="w-[228px] h-full flex flex-col items-center mb-2 shadow-md bg-black text-amber-200 cursor-pointer relative">
+  <div
+    class="category-card-container shadow-md"
+    @click="navigateToCategoryDetails"
+  >
     <div class="relative w-[228px] h-[228px]">
       <img
-          :src="category.imageUrl"
-          :alt="category.name"
-          class="w-full h-full object-cover object-center"
-          loading="lazy"
+        class="w-full h-full object-cover object-center"
+        :src="category.imageUrl"
+        :alt="category.name"
+        loading="lazy"
       />
-      <div class="absolute inset-0 gradient-overlay"></div>
+      <div class="absolute inset-0 gradient-overlay" />
     </div>
     <div class="p-2 text-center text-white bg-black text-2xl">
       {{ category.name }}
@@ -35,7 +38,18 @@ const navigateToCategoryDetails = () => {
 
 <style scoped>
 .gradient-overlay {
-  background: rgba(0, 0, 0, 0.20);
+  background: var(--black-20);
+}
+.category-card-container {
+  color: var(--amber-200);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 228px;
+  height: 100%;
+  cursor: pointer;
+  background-color: var(--black);
+  position: relative;
 }
 </style>
 

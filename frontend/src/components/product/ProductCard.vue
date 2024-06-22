@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import {Product} from "@/types/product";
-import {useRouter} from "vue-router";
-import {deleteItem} from "@/actions/localStorageActions";
+import { ProductCardType } from "@/types/product";
+import { useRouter } from "vue-router";
+import { deleteItem } from "@/actions/localStorageActions";
 import BaseButton from "@/components/base/BaseButton.vue";
 
-const { product, parentCategoryId, showAsRow = false } = defineProps<{
-  product: Product,
-  parentCategoryId: number,
-  showAsRow?: boolean,
-}>();
+const props = withDefaults(defineProps<ProductCardType>(), {
+  showAsRow: false
+});
+const { parentCategoryId, product } = props;
 
 const router = useRouter();
 
@@ -26,9 +25,16 @@ const deleteFromCart = () => {
 
 <template>
   <div v-if="!showAsRow">
-    <div @click="navigateToProductDetails" class="w-[160px] h-full flex flex-col items-center mb-2 shadow-md bg-black text-amber-200 cursor-pointer relative">
+    <div
+      class="card-container shadow-md"
+      @click="navigateToProductDetails"
+    >
       <div class="relative w-full h-[160px]">
-        <img :src="product.thumbnailUrl" :alt="product.name" class="w-full h-full object-cover object-center" />
+        <img
+          class="w-full h-full object-cover object-center"
+          :src="product.thumbnailUrl"
+          :alt="product.name"
+        />
       </div>
       <div class="p-2 text-center text-white bg-black text-2xl">
         {{ product.name }}
@@ -37,19 +43,44 @@ const deleteFromCart = () => {
   </div>
   <div v-else>
     <div class="w-[600px] flex flex-row items-center mb-2 border-b border-t justify-between">
-      <div @click="navigateToProductDetails" class="flex flex-row gap-[24px] items-center">
+      <div
+        class="flex flex-row gap-[24px] items-center"
+        @click="navigateToProductDetails"
+      >
         <div class="relative h-[100px] cursor-pointer">
-          <img :src="product.thumbnailUrl" :alt="product.name" class="w-full h-full object-cover object-center" />
+          <img
+            class="w-full h-full object-cover object-center"
+            :src="product.thumbnailUrl"
+            :alt="product.name"
+          />
         </div>
         <div class="p-2 text-center text-black bg-transparent text-xl">
           {{ product.name }}
         </div>
       </div>
-      <BaseButton :on-click="deleteFromCart" text="Delete" dark/>
+      <BaseButton
+        :on-click="deleteFromCart"
+        text="Delete"
+        dark
+      />
     </div>
   </div>
 </template>
 
 <style scoped>
-
+.card-container {
+  width: 160px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8px;
+  position: relative;
+  color: var(--amber-200);
+  background-color: var(--black);
+  cursor: pointer;
+}
+.card-container:hover {
+  background-color: var(--magenta);
+}
 </style>

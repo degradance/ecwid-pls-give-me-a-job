@@ -1,16 +1,4 @@
-<template>
-  <div class="popup-overlay" @click.self="close">
-    <div class="popup-content">
-      <slot />
-      <div class="button-panel">
-        <BaseButton :on-click="close" text="Close" dark special/>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script setup>
-import { defineEmits } from 'vue';
+<script setup lang="ts">
 import BaseButton from "@/components/base/BaseButton.vue";
 
 const emit = defineEmits(['close']);
@@ -19,6 +7,25 @@ const close = () => {
   emit('close');
 };
 </script>
+
+<template>
+  <div
+    class="popup-overlay"
+    @click.self="close"
+  >
+    <div class="popup-content">
+      <slot />
+      <div class="button-panel">
+        <BaseButton
+          :on-click="close"
+          text="Close"
+          dark
+          special
+        />
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .popup-overlay {

@@ -1,18 +1,19 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import Categories from "@/views/Categories.vue";
 import Cart from "@/views/TheCart.vue";
 import CategoryDetails from "@/views/CategoryDetails.vue";
 import ProductDetails from "@/views/ProductDetails.vue";
+import TheHomepage from "@/views/TheHomepage.vue";
+import TheCart from "@/views/TheCart.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
-        redirect: '/categories'
+        redirect: '/home'
     },
     {
-        path: '/categories',
-        name: 'Categories',
-        component: Categories
+        path: '/home',
+        name: 'Homepage',
+        component: TheHomepage
     },
     {
         path: '/categories/:id',
@@ -27,7 +28,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/cart',
         name: 'Cart',
-        component: Cart
+        component: TheCart
     },
 ];
 

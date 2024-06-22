@@ -4,13 +4,13 @@ import {useRoute, useRouter} from 'vue-router';
 import IconBackArrow from "@/components/icons/IconBackArrow.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import {fetchProducts} from "@/actions/productActions";
-import {Product} from "@/types/product";
-import Gallery from "@/components/product/Gallery.vue";
+import {ProductType} from "@/types/product";
+import Gallery from "@/components/product/ImageGallery.vue";
 import {addItem, deleteItem, isAdded} from "@/actions/localStorageActions";
 
 const route = useRoute();
 const router = useRouter();
-const product = ref<Product>();
+const product = ref<ProductType>();
 
 const back = () => {
   router.back()
@@ -42,25 +42,50 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-if="product" class="m-[64px] w-full flex flex-col gap-[32px]">
-    <BaseButton :on-click="back" text="Назад" dark>
+  <div
+    v-if="product"
+    class="m-[64px] w-full flex flex-col gap-[32px]"
+  >
+    <BaseButton
+      :on-click="back"
+      text="Назад"
+      dark
+    >
       <IconBackArrow />
     </BaseButton>
     <div class="flex flex-row gap-[24px] items-top">
       <Gallery :gallery-images="product.galleryImages" />
       <div class="w-[400px] flex flex-col gap-[24px] items-center">
-        <h1 class="text-4xl font-bold text-black">{{ product.name }}</h1>
+        <h1 class="text-4xl font-bold text-black">
+          {{ product.name }}
+        </h1>
         <div class="flex flex-col gap-[24px] h-[350px] w-full">
-          <h3 class="text-2xl font-bold text-black">Description</h3>
-          <div v-html="product.description" class="text-justify description overflow-y-auto"/>
+          <h3 class="text-2xl font-bold text-black">
+            Description
+          </h3>
+          <div
+            class="text-justify description overflow-y-auto"
+            v-html="product.description"
+          />
         </div>
         <div class="flex flex-row gap-[24px] items-center justify-between w-full">
-          <p class="text-3xl font-bold text-black">&#8381;{{ product.price }}</p>
+          <p class="text-3xl font-bold text-black">
+            &#8381;{{ product.price }}
+          </p>
           <div v-if="checkInCart">
-            <BaseButton :on-click="deleteFromCart" text="Delete from Cart" dark/>
+            <BaseButton
+              :on-click="deleteFromCart"
+              text="Delete from Cart"
+              dark
+            />
           </div>
           <div v-else>
-            <BaseButton :on-click="addToCart" text="Add to Cart" dark special/>
+            <BaseButton
+              :on-click="addToCart"
+              text="Add to Cart"
+              dark
+              special
+            />
           </div>
         </div>
       </div>

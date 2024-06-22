@@ -5,16 +5,24 @@ import ImageWrapper from "@/components/ImageWrapper.vue";
 
 <template>
   <div class="bg-white flex flex-col gap-[32px] items-center overflow-x-hidden">
-    <ImageWrapper label="Category" :img-height=200>
-      <img src="/wear1.jpg" alt="wear1"/>
+    <ImageWrapper
+      label="Category"
+      :img-height="200"
+    >
+      <img
+        src="/wear1.jpg"
+        alt="wear1"
+      >
     </ImageWrapper>
     <CategoryList />
-    <ImageWrapper label="SALE" :img-height=300>
-      <img src="/wear2.jpg" alt="wear2"/>
+    <ImageWrapper
+      label="SALE"
+      :img-height="300"
+    >
+      <img
+        src="/wear2.jpg"
+        alt="wear2"
+      >
     </ImageWrapper>
   </div>
 </template>
-
-<style scoped>
-
-</style>

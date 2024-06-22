@@ -1,8 +1,8 @@
-<script setup>
-import {useRouter} from "vue-router";
+<script setup lang="ts">
+import { useRouter } from "vue-router";
 import BaseButton from "@/components/base/BaseButton.vue";
 import IconCart from "@/components/icons/IconCart.vue";
-import {computed, onMounted, onUnmounted, ref} from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { getSavedItems } from '@/actions/localStorageActions';
 
 const router = useRouter();
